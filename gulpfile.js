@@ -38,11 +38,14 @@ gulp.task('browser-sync', false, function () {
 // Compile compass
 gulp.task('compass', 'Compiles compass', function () {
   return gulp.src(paths.scss)
+    .pipe(sourcemaps.init())
     .pipe(sass({
+      sourcemap: false,
       compass:true
     }))
     // Minify CSS
     .pipe(minifyCSS())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css))
     .pipe(reload({stream:true}));
 });
