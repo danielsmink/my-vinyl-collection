@@ -96,7 +96,7 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'compass', 'js', 'browser-sync']);
 
 // Deploy task
-gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['js'], function () {
+gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['js', 'compass'], function () {
   return gulp.src('./public/**/*')
     .pipe(deploy());
 });
