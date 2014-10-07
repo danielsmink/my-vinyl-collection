@@ -6,6 +6,9 @@
         <td data-title="'Artist'" sortable="'artist'">
             {{record.artist}}
         </td>
+        <td>
+            <a data-ng-click="vinyl.deleteRecord(record)">delete</a>
+        </td>
     </tr>
 </table>
 
@@ -14,6 +17,3 @@
     <input type="text" data-ng-model="vinyl.record.artist" />
     <input type="submit" value="Add record" />
 </form>
-
-Records: {{ vinyl.records }}<br />
-Record: {{ vinyl.record }}

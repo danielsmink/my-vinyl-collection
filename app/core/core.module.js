@@ -13,6 +13,8 @@
     /*
      * 3rd Party modules
      */
-    'ui.router', 'ngTable'
+    'firebase',
+    'ui.router',
+    'ngTable'
   ]);
 })();

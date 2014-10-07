@@ -53,6 +53,7 @@
   "node": true,
   "globals": {
     "angular": false,
-    "$": false
+    "$": false,
+    "Firebase": false
   }
 }
