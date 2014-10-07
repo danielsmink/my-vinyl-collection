@@ -1,0 +1,19 @@
+<table data-ng-table="vinyl.tableParams" class="table">
+    <tr data-ng-repeat="record in $data">
+        <td data-title="'Title'" sortable="'title'">
+            {{record.title}}
+        </td>
+        <td data-title="'Artist'" sortable="'artist'">
+            {{record.artist}}
+        </td>
+        <td>
+            <a data-ng-click="vinyl.deleteRecord(record)">delete</a>
+        </td>
+    </tr>
+</table>
+
+<form data-ng-submit="vinyl.submitRecord()">
+    <input type="text" data-ng-model="vinyl.record.title" />
+    <input type="text" data-ng-model="vinyl.record.artist" />
+    <input type="submit" value="Add record" />
+</form>
