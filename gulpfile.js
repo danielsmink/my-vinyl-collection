@@ -15,7 +15,7 @@ var gulp = require('gulp'),
   deploy = require('gulp-gh-pages'),
   karma = require('gulp-karma'),
   paths = {
-    scripts: ['./app/**/*.js', '!./app/**/*Spec.js'],
+    scripts: ['./app/**/*module*.js', './app/**/*.js', '!./app/**/*Spec.js'],
     jsCompiled: './public/js',
     scss: './app/assets/scss/**/*.scss',
     scssDir: './app/assets/scss',
