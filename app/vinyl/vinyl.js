@@ -46,6 +46,7 @@
           title: '',
           artist: ''
         };
+        vm.lastId = undefined;
         vm.tableParams.reload();
       });
 
@@ -53,9 +54,9 @@
 
     // Delete a record
     function deleteRecord(record) {
-      vinylService.delete(record).then(function () {
-        vm.tableParams.reload();
-      });
+      vinylService.delete(record);
+      vm.lastId = undefined;
+      vm.tableParams.reload();
     }
 
   }

@@ -25,7 +25,7 @@
         return $firebase(ref.child(recordId)).$asObject();
       },
       delete: function (record) {
-        return records.$remove(record);
+        return ref.child(record.$id).remove();
       }
     };
 
