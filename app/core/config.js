@@ -25,6 +25,17 @@
         templateUrl: 'js/partials/vinyl/vinyl.html',
         controller: 'Vinyl',
         controllerAs: 'vinyl'
+      })
+      .state('edit-vinyl', {
+        url: '/edit-vinyl/:id',
+        templateUrl: 'js/partials/vinyl/edit-vinyl.html',
+        resolve: {
+          record: function($stateParams, vinylService) {
+            return vinylService.find($stateParams.id);
+          }
+        },
+        controller: 'EditVinyl',
+        controllerAs: 'edit'
       });
   }
 })();

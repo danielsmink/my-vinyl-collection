@@ -7,7 +7,12 @@
             {{record.artist}}
         </td>
         <td>
-            <a data-ng-click="vinyl.deleteRecord(record)">delete</a>
+            <a data-ng-click="vinyl.deleteRecord(record)">
+                delete
+            </a>
+            <a ui-sref="edit-vinyl({id: record.$id})">
+                edit
+            </a>
         </td>
     </tr>
 </table>

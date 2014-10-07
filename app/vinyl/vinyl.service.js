@@ -26,6 +26,9 @@
       },
       delete: function (record) {
         return ref.child(record.$id).remove();
+      },
+      save: function(record) {
+        return record.$save();
       }
     };
 
