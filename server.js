@@ -7,13 +7,13 @@ var express = require('express'),
     morgan = require('morgan'), // log requests to the console
     bodyParser = require('body-parser'), // pull information from HTML POST
     methodOverride = require('method-override'), // simulate DELETE and PUT
-    mongoUser = process.env.USER, // modulus user name
-    mongoPassword = process.env.PASSWORD; // modulus password
+    // load local modules
+    database = require('./config/database'); //load database config
 
 // configuration ==========================================
 
 // connect with mongoDB database on modulus.io
-mongoose.connect('mongodb://' + mongoUser + ':' + mongoPassword + '@proximus.modulusmongo.net:27017/xevyG6iq');
+mongoose.connect(database.url);
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
@@ -37,107 +37,8 @@ app.use(bodyParser.json(
 ));
 app.use(methodOverride());
 
-// define model ==========================================
-var Vinyl = mongoose.model('Vinyl', {
-    title : String
-});
-
-// routes ================================================
-
-// api ---------------------------------------------------
-
-// get all vinyl
-app.get('/api/vinyl', function(req, res) {
-    // use mongoos to get all Vinyl in the database
-    Vinyl.find(function(err, vinyl){
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        // return all vinyl in JSON format
-        res.json(vinyl);
-    });
-});
-
-// get a single album
-app.get('/api/vinyl/:vinyl_id', function(req, res) {
-    // use mongoos to get a single album from the database
-    Vinyl.findById(req.params.vinyl_id, function(err, album){
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        // return all vinyl in JSON format
-        res.json(album);
-    });
-});
-
-// create an album and send back all vinyl objects after creation
-app.post('/api/vinyl', function(req, res) {
-    // create an album, information comes from AJAX request from Angular
-    Vinyl.create({
-        title : req.body.title
-    }, function(err, album) {
-        if (err) {
-            res.send(err);
-        }
-
-        // get an return all vinyl objects after creation
-        Vinyl.find(function(err, vinyl) {
-            if(err) {
-               res.send(err);
-            }
-
-            res.json(vinyl);
-        });
-    });
-});
-
-// update a single album
-app.put('/api/vinyl/:vinyl_id', function (req, res){
-    // use mongoos to get a single album from the database
-    Vinyl.findById(req.params.vinyl_id, function(err, album){
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-        // update album data
-        album.title = req.body.title;
-        // save album
-        album.save(function(err) {
-            if (err) {
-                res.send(err);
-            }
-            // return album
-            res.json(album);
-        });
-    });
-});
-
-// delete an album
-app.delete('/api/vinyl/:vinyl_id', function(req, res) {
-    // delete an album id comes as a queryparameter
-    Vinyl.remove({
-        _id : req.params.vinyl_id
-    }, function(err, album) {
-        if (err) {
-          res.send(err);
-        }
-
-        // get an return all vinyl after deletion
-        Vinyl.find(function(err, vinyl) {
-            if(err) {
-                res.send(err);
-            }
-
-            res.json(vinyl);
-        });
-    });
-});
-
-
+// load the routes =======================================
+require('./api/routes')(app);
 
 // listen (start app with node server.js) ================
 app.listen(8080);
