@@ -62,7 +62,7 @@ app.get('/api/vinyl', function(req, res) {
 
 // get a single album
 app.get('/api/vinyl/:vinyl_id', function(req, res) {
-    // use mongoos to get all Vinyl in the database
+    // use mongoos to get a single album from the database
     Vinyl.findById(req.params.vinyl_id, function(err, album){
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
@@ -91,6 +91,27 @@ app.post('/api/vinyl', function(req, res) {
             }
 
             res.json(vinyl);
+        });
+    });
+});
+
+// update a single album
+app.put('/api/vinyl/:vinyl_id', function (req, res){
+    // use mongoos to get a single album from the database
+    Vinyl.findById(req.params.vinyl_id, function(err, album){
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err);
+        }
+        // update album data
+        album.title = req.body.title;
+        // save album
+        album.save(function(err) {
+            if (err) {
+                res.send(err);
+            }
+            // return album
+            res.json(album);
         });
     });
 });

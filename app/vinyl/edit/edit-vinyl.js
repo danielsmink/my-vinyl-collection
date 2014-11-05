@@ -16,7 +16,7 @@
     vm.saveRecord = saveRecord;
 
     function saveRecord() {
-      vinylService.save(vm.record).then(function() {
+      vinylService.update({ vinyl_id:record._id }, record).$promise.then(function() {
         $state.go('vinyl');
       });
     }
