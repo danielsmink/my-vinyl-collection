@@ -31,7 +31,7 @@
         templateUrl: 'js/partials/vinyl/edit/edit-vinyl.html',
         resolve: {
           record: function($stateParams, vinylService) {
-            return vinylService.get({ id: $stateParams.id});
+            return vinylService.get({ vinyl_id: $stateParams.id});
           }
         },
         controller: 'EditVinyl',

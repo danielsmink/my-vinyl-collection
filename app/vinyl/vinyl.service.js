@@ -7,6 +7,6 @@
 
   /* @ngInject */
   function vinylService($resource, API_URL) {
-    return $resource(API_URL + 'vinyl/:vinyl_id');
+    return $resource(API_URL + 'vinyl/:vinyl_id', {vinyl_id:'@id'});
   }
 })();
