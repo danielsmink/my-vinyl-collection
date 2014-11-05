@@ -7,6 +7,7 @@
 
   /* @ngInject */
   function vinylService($resource, API_URL) {
+    // Our API returns the JSON object inside an array so we have to override all methods
     return $resource(API_URL + 'vinyl/:vinyl_id', {vinyl_id:'@id'},
       {
         'get':    {method:'GET', isArray:true},

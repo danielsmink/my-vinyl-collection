@@ -29,7 +29,6 @@
 
     // Create a new record
     function submitRecord() {
-      console.log(vm.record);
       vinylService.save(vm.record).$promise.then(function(data) {
         vm.record = null;
         vm.albums = data;
