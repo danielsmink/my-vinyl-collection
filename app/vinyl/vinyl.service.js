@@ -14,7 +14,7 @@
         'save':   {method:'POST', isArray:true},
         'query':  {method:'GET', isArray:true},
         'delete': {method:'DELETE', isArray:true},
-        'update': { method:'PUT', isArray:true}
+        'update': { method:'PUT'}
       }
     );
   }
