@@ -1,7 +1,9 @@
 <table data-ng-table="vinyl.tableParams" class="table">
     <tr data-ng-repeat="record in vinyl.albums">
         <td data-title="'Title'" sortable="'title'">
-            {{record.title}}
+            <a ui-sref="vinyl-detail({id: record._id})">
+                {{record.title}}
+            </a>
         </td>
         <td data-title="'Artist'" sortable="'artist'">
         </td>

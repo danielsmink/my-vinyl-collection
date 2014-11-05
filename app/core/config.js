@@ -26,6 +26,17 @@
         controller: 'Vinyl',
         controllerAs: 'vinyl'
       })
+      .state('vinyl-detail', {
+        url: '/vinyl/:id',
+        templateUrl: 'js/partials/vinyl/detail/vinyl-detail.html',
+        resolve: {
+          record: function($stateParams, vinylService) {
+            return vinylService.get({ vinyl_id: $stateParams.id});
+          }
+        },
+        controller: 'VinylDetail',
+        controllerAs: 'detail'
+      })
       .state('edit-vinyl', {
         url: '/edit-vinyl/:id',
         templateUrl: 'js/partials/vinyl/edit/edit-vinyl.html',

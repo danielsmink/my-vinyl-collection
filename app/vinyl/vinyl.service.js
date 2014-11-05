@@ -10,7 +10,7 @@
     // Our API returns the JSON object inside an array so we have to override all methods
     return $resource(API_URL + 'vinyl/:vinyl_id', {vinyl_id:'@id'},
       {
-        'get':    {method:'GET', isArray:true},
+        'get':    {method:'GET'},
         'save':   {method:'POST', isArray:true},
         'query':  {method:'GET', isArray:true},
         'delete': {method:'DELETE', isArray:true},
