@@ -6,12 +6,14 @@ var express = require('express'),
     mongoose = require('mongoose'), // mongoose for mongodb
     morgan = require('morgan'), // log requests to the console
     bodyParser = require('body-parser'), // pull information from HTML POST
-    methodOverride = require('method-override'); // simulate DELETE and PUT
+    methodOverride = require('method-override'), // simulate DELETE and PUT
+    mongoUser = process.env.USER, // modulus user name
+    mongoPassword = process.env.PASSWORD; // modulus password
 
 // configuration ==========================================
 
 // connect with mongoDB database on modulus.io
-mongoose.connect('mongodb://<user>:<password>@proximus.modulusmongo.net:27017/xevyG6iq');
+mongoose.connect('mongodb://' + mongoUser + ':' + mongoPassword + '@proximus.modulusmongo.net:27017/xevyG6iq');
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + 'public'));
@@ -61,6 +63,8 @@ app.get('/api/vinyl', function(req, res) {
 // create an album and send back all vinyl objects after creation
 app.post('/api/vinyl', function(req, res) {
 
+    console.log(req.body);
+
     // create an album, information comes from AJAX request from Angular
     Vinyl.create({
         title : req.body.title
@@ -83,7 +87,7 @@ app.post('/api/vinyl', function(req, res) {
 // delete an album
 app.delete('/api/vinyl/:vinyl_id', function(req, res) {
     Vinyl.remove({
-
+        _id : req.params.vinyl_id
     }, function(err, album) {
         if (err) {
           res.send(err);
