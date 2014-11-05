@@ -60,6 +60,20 @@ app.get('/api/vinyl', function(req, res) {
     });
 });
 
+// get a single album
+app.get('/api/vinyl/:vinyl_id', function(req, res) {
+    // use mongoos to get all Vinyl in the database
+    Vinyl.findById(req.params.vinyl_id, function(err, album){
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err);
+        }
+
+        // return all vinyl in JSON format
+        res.json(album);
+    });
+});
+
 // create an album and send back all vinyl objects after creation
 app.post('/api/vinyl', function(req, res) {
     // create an album, information comes from AJAX request from Angular
