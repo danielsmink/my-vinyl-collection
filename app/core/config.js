@@ -22,16 +22,16 @@
     $stateProvider
       .state('vinyl', {
         url: '/vinyl',
-        templateUrl: 'js/partials/vinyl/vinyl.html',
+        templateUrl: 'js/partials/vinyl/list/vinyl.html',
         controller: 'Vinyl',
         controllerAs: 'vinyl'
       })
       .state('edit-vinyl', {
         url: '/edit-vinyl/:id',
-        templateUrl: 'js/partials/vinyl/edit-vinyl.html',
+        templateUrl: 'js/partials/vinyl/edit/edit-vinyl.html',
         resolve: {
           record: function($stateParams, vinylService) {
-            return vinylService.find($stateParams.id);
+            return vinylService.get({ id: $stateParams.id});
           }
         },
         controller: 'EditVinyl',

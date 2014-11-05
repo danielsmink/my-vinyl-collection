@@ -16,7 +16,7 @@ var express = require('express'),
 mongoose.connect('mongodb://' + mongoUser + ':' + mongoPassword + '@proximus.modulusmongo.net:27017/xevyG6iq');
 
 // set the static files location /public/img will be /img for users
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(__dirname + '/public'));
 
 // log every request to the console
 app.use(morgan('dev'));
@@ -24,7 +24,7 @@ app.use(morgan('dev'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded(
     {
-        'extended':'true'
+        'extended' : 'true'
     }
 ));
 // parse application/json
@@ -32,14 +32,14 @@ app.use(bodyParser.json());
 // parse application/vnd.api+json as json
 app.use(bodyParser.json(
     {
-        'type':'application/vnd.api+json'
+        'type' : 'application/vnd.api+json'
     }
 ));
 app.use(methodOverride());
 
 // define model ==========================================
 var Vinyl = mongoose.model('Vinyl', {
-   title : String
+    title : String
 });
 
 // routes ================================================
@@ -62,9 +62,6 @@ app.get('/api/vinyl', function(req, res) {
 
 // create an album and send back all vinyl objects after creation
 app.post('/api/vinyl', function(req, res) {
-
-    console.log(req.body);
-
     // create an album, information comes from AJAX request from Angular
     Vinyl.create({
         title : req.body.title
@@ -74,7 +71,7 @@ app.post('/api/vinyl', function(req, res) {
         }
 
         // get an return all vinyl objects after creation
-        Vinyl.find(function(err, vinyl){
+        Vinyl.find(function(err, vinyl) {
             if(err) {
                res.send(err);
             }
@@ -86,6 +83,7 @@ app.post('/api/vinyl', function(req, res) {
 
 // delete an album
 app.delete('/api/vinyl/:vinyl_id', function(req, res) {
+    // delete an album id comes as a queryparameter
     Vinyl.remove({
         _id : req.params.vinyl_id
     }, function(err, album) {
@@ -94,7 +92,7 @@ app.delete('/api/vinyl/:vinyl_id', function(req, res) {
         }
 
         // get an return all vinyl after deletion
-        Vinyl.find(function(err, vinyl){
+        Vinyl.find(function(err, vinyl) {
             if(err) {
                 res.send(err);
             }
@@ -104,12 +102,7 @@ app.delete('/api/vinyl/:vinyl_id', function(req, res) {
     });
 });
 
-// application -------------------------------------------
 
-app.get('*', function(req, res) {
-    // load the single view file (angular will handle the page changes on the front-end)
-    res.sendfile('./public/index.html');
-});
 
 // listen (start app with node server.js) ================
 app.listen(8080);

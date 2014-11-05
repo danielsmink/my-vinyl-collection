@@ -1,10 +1,9 @@
 <table data-ng-table="vinyl.tableParams" class="table">
-    <tr data-ng-repeat="record in $data">
+    <tr data-ng-repeat="record in vinyl.albums">
         <td data-title="'Title'" sortable="'title'">
             {{record.title}}
         </td>
         <td data-title="'Artist'" sortable="'artist'">
-            {{record.artist}}
         </td>
         <td>
             <a data-ng-click="vinyl.deleteRecord(record)">

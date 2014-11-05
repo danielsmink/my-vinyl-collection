@@ -40,6 +40,7 @@ gulp.task('compass', 'Compiles compass', function () {
   return gulp.src(paths.scss)
     .pipe(sourcemaps.init())
     .pipe(sass({
+      bundleExec: true,
       sourcemap: false,
       compass:true
     }))
