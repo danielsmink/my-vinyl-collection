@@ -9,5 +9,6 @@ var mongoose = require('mongoose');
 
 // define model ==========================================
 module.exports = mongoose.model('Vinyl', {
-    title : String
+    title : String,
+    artist : String
 });
