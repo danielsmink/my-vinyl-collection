@@ -45,7 +45,8 @@ module.exports = function(app) {
     app.post('/api/vinyl', function (req, res) {
         // create an album, information comes from AJAX request from Angular
         Vinyl.create({
-            title: req.body.title
+            title: req.body.title,
+            artist: req.body.artist
         }, function (err, album) {
             if (err) {
                 res.send(err);
@@ -72,6 +73,7 @@ module.exports = function(app) {
             }
             // update album data
             album.title = req.body.title;
+            album.artist = req.body.artist;
             // save album
             album.save(function (err) {
                 if (err) {
